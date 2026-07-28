@@ -210,6 +210,10 @@ for index, movie_name in enumerate(new_movies, start=1):
             or details.get("year")
         )
 
+        # Watchmode provides genre names as a list.
+        # Use an empty list if no genres are available.
+        genres = details.get("genre_names") or []
+
 
         # ----------------------------------------------------
         # SAVE MOVIE
@@ -219,6 +223,7 @@ for index, movie_name in enumerate(new_movies, start=1):
             "description": description,
             "poster": poster,
             "release_date": release_date,
+            "genres": genres,
         }
 
 
@@ -260,3 +265,4 @@ print()
 print("Done!")
 print(f"Total movies in JSON: {len(movie_data)}")
 print(f"Saved to: {DATA_FILE}")
+
