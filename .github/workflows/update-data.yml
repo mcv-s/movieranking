@@ -27,7 +27,7 @@ jobs:
       - name: Generate movie data
         env:
           API_KEY: ${{ secrets.API_KEY }}
-        run: python generate_movies_json.py
+        run: update_data.py
 
       - name: Commit updated movies.json
         run: |
