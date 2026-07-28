@@ -1,7 +1,7 @@
 Inception
 Interstellar
-Arrival
 Dune
+Arrival
 Tron Legacy
 Tron Ares
 Wall-E
@@ -33,6 +33,7 @@ The Absent-Minded Professor
 Cars 2
 Monsters, Inc.
 Mary Poppins
+The Love Bug
 Aladdin
 Cars 1
 ARGYLE
@@ -40,10 +41,10 @@ Planes 2
 The Lion King
 Pollyanna
 Planes 1
-The Love Bug
 Alice in Wonderland
 The Great Mouse Detective
 The Secret Garden
+A Bug’s Life
 Tarzan
 National Treasure
 Frozen
@@ -53,7 +54,6 @@ Cars 3
 An American Tail
 Toy Story 3
 -------------------------------------------------------------
-A Bug’s Life
 Mulan
 Pocahontas
 The Jungle Book
