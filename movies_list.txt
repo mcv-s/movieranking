@@ -27,19 +27,25 @@ Finding Nemo
 Finding Dory
 Escape to Witch Mountain
 The Parent Trap
+20,000 Leagues Under the Sea
 Robin Hood (Animated)
 The Absent-Minded Professor
 Cars 2
 Monsters, Inc.
 Mary Poppins
+Aladdin
 Cars 1
 ARGYLE
+Planes 2
 The Lion King
 Pollyanna
+Planes 1
 The Love Bug
 Alice in Wonderland
 The Great Mouse Detective
 The Secret Garden
+Tarzan
+National Treasure
 Frozen
 The Little Mermaid
 Annie
@@ -47,12 +53,6 @@ Cars 3
 An American Tail
 Toy Story 3
 -------------------------------------------------------------
-Planes 1
-Planes 2
-Aladdin
-20,000 Leagues Under the Sea
-National Treasure
-Tarzan
 A Bug’s Life
 Mulan
 Pocahontas
@@ -71,3 +71,4 @@ Sleeping Beauty
 The Princess and the Frog
 Bambi
 Dumbo
+The Lost Bus
