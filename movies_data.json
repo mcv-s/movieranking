@@ -338,5 +338,15 @@
     "description": "When a fast-moving wildfire traps a teacher and her students, a reluctant school bus driver volunteers to bring them to safety. As smoke, flames, blocked roads, and widespread chaos close in, the group must rely on courage and cooperation during a desperate journey through the disaster.",
     "poster": "https://image.tmdb.org/t/p/w780/4IPxzGlE17fJAwUTMul4opMeutA.jpg",
     "release_date": "2025-09-19"
+  },
+  "Wall E": {
+    "description": "On a deserted Earth buried in waste, a lonely cleanup robot discovers a new purpose after meeting an advanced probe sent to search for signs of life. Their connection leads them from the planet to a spacebound human community and an unexpected adventure tied to humanity’s future.",
+    "poster": "https://image.tmdb.org/t/p/w780/hbhFnRzzg6ZDmm8YAmxBnQpQIPh.jpg",
+    "release_date": "2008-06-26",
+    "genres": [
+      "Animation",
+      "Family",
+      "Science Fiction"
+    ]
   }
 }
