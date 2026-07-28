@@ -412,6 +412,11 @@ h1 {
 ========================================================= */
 
 .edit-toolbar {
+    position: sticky;
+    margin-top: 10px;
+    top: 58px;
+    z-index: 40;
+
     display: flex;
     align-items: center;
 
@@ -444,7 +449,15 @@ h1 {
         padding 0.35s ease,
         margin 0.35s ease,
         border-color 0.35s ease;
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
 }
+
+
+
+
 
 body.editing .edit-toolbar {
     max-height: 100px;
@@ -603,6 +616,18 @@ body.editing .edit-toolbar {
         box-shadow 0.2s ease,
         transform 0.2s ease;
 }
+
+
+
+.movie-card {
+    cursor: pointer;
+}
+
+
+
+
+
+
 
 .movie-card:hover {
     background: var(--surface-hover);
@@ -879,18 +904,25 @@ body.editing .movie-card {
         rgba(0,0,0,0.35);
 }
 
+
+
+
+
+
+
+
 .movie-row.drag-over {
-    transform:
-        translateY(3px);
+    transform: translateY(2px);
 }
 
 .movie-row.drag-over .movie-card {
-    border-top:
-        2px solid var(--accent);
+    border-color: var(--accent);
 
     box-shadow:
-        0 -4px 18px
-        rgba(139,92,246,0.14);
+        0 0 0 2px
+        rgba(139,92,246,0.16),
+        0 0 18px
+        rgba(139,92,246,0.10);
 }
 
 
@@ -2024,6 +2056,38 @@ body.editing .movie-card {
 
         <div class="modal-details">
 
+    <div class="detail">
+
+        <div class="detail-label">
+            Release Date
+        </div>
+
+        <div
+            class="detail-value"
+            id="modalReleaseDate"
+        >
+            Unknown
+        </div>
+
+    </div>
+
+
+    <div class="detail">
+
+        <div class="detail-label">
+            Current Ranking
+        </div>
+
+        <div class="detail-value">
+            <span id="modalRank">
+                #1
+            </span>
+        </div>
+
+    </div>
+
+</div>
+
             <div class="detail">
 
                 <div class="detail-label">
@@ -2187,144 +2251,386 @@ let editing = false;
 
 let draggedIndex = null;
 
+let currentDropIndex = null;
+
 let undoStack = [];
+
+let movieData = {};
+
+
+
+
+/* =========================================================
+   OPEN MOVIE
+========================================================= */
+
+
+
+
+
+
+function openMovie(index) {
+
+    if (editing) {
+        return;
+    }
+
+
+    const title =
+        movies[index];
+
+
+    if (!title) {
+        return;
+    }
+
+
+    const data =
+        movieData[title] || {};
+
+
+    const modal =
+        document.getElementById(
+            "movieModal"
+        );
+
+
+    const poster =
+        document.getElementById(
+            "poster"
+        );
+
+
+    const modalTitle =
+        document.getElementById(
+            "modalTitle"
+        );
+
+
+    const posterTitle =
+        document.getElementById(
+            "posterTitle"
+        );
+
+
+    const description =
+        document.getElementById(
+            "modalDescription"
+        );
+
+
+    /*
+        Populate title
+    */
+
+    modalTitle.textContent =
+        title;
+
+
+    posterTitle.textContent =
+        title;
+
+
+    /*
+        Populate ranking
+    */
+
+    document
+        .querySelectorAll("#modalRank")
+        .forEach(
+            element => {
+
+                element.textContent =
+                    "#" +
+                    (index + 1);
+
+            }
+        );
+
+
+    /*
+        Populate description
+    */
+
+    description.textContent =
+        data.description ||
+        "No description is available for this movie.";
+
+
+    /*
+        Populate release date
+    */
+
+    const releaseDate =
+        document.getElementById(
+            "modalReleaseDate"
+        );
+
+
+    releaseDate.textContent =
+        data.release_date ||
+        "Unknown";
+
+
+    /*
+        Populate poster
+    */
+
+    if (data.poster) {
+
+        poster.style.backgroundImage =
+            `url("${data.poster}")`;
+
+        poster.style.backgroundSize =
+            "cover";
+
+        poster.style.backgroundPosition =
+            "center";
+
+    } else {
+
+        poster.style.backgroundImage =
+            "";
+
+    }
+
+
+    /*
+        Open modal
+    */
+
+    modal.classList.add(
+        "open"
+    );
+
+
+    document.body
+        .classList
+        .add(
+            "modal-open"
+        );
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* =========================================================
    LOAD MOVIES FROM FILE
 ========================================================= */
 
-async function loadMovies() {
+function openRandomMovie() {
 
-    try {
+    if (
+        movies.length === 0
+    ) {
 
-        const response =
-            await fetch(
-                "movies_list.txt?cache=" +
-                Date.now()
-            );
+        showToast(
+            "There are no movies to pick from."
+        );
 
-
-        if (
-            !response.ok
-        ) {
-
-            throw new Error(
-                "Could not load movies_list.txt"
-            );
-
-        }
-
-
-        const text =
-            await response.text();
-
-
-        movies =
-            text
-                .split(/\r?\n/)
-                .map(
-                    movie =>
-                        movie.trim()
-                )
-                .filter(Boolean);
-
-
-        /*
-            Restore the locally edited list
-            if one exists.
-        */
-
-        const saved =
-            localStorage.getItem(
-                "movieRankMovies"
-            );
-
-
-        if (saved) {
-
-            try {
-
-                const parsed =
-                    JSON.parse(saved);
-
-
-                if (
-                    Array.isArray(
-                        parsed
-                    )
-                ) {
-
-                    movies =
-                        parsed;
-
-                }
-
-            } catch {}
-
-        }
-
-
-        renderMovies();
-
-    } catch (error) {
-
-        console.error(error);
-
-
-        const saved =
-            localStorage.getItem(
-                "movieRankMovies"
-            );
-
-
-        if (saved) {
-
-            try {
-
-                movies =
-                    JSON.parse(saved);
-
-                renderMovies();
-
-                showToast(
-                    "Loaded saved movie list."
-                );
-
-                return;
-
-            } catch {}
-
-        }
-
-
-        document
-            .getElementById(
-                "movieList"
-            )
-            .innerHTML = `
-
-                <div class="state">
-
-                    <div class="state-title">
-                        Could not load movies
-                    </div>
-
-                    <div class="state-description">
-                        Make sure
-                        <strong>
-                            movies_list.txt
-                        </strong>
-                        is in the same directory.
-                    </div>
-
-                </div>
-
-            `;
+        return;
 
     }
 
+
+    /*
+        Pick a random movie from the
+        CURRENT ranking.
+    */
+
+    const randomIndex =
+        Math.floor(
+            Math.random() *
+            movies.length
+        );
+
+
+    const title =
+        movies[randomIndex];
+
+
+    /*
+        Find the metadata for this movie.
+
+        The Python script uses the movie title
+        as the JSON object key.
+    */
+
+    const data =
+        movieData[title];
+
+
+    const modal =
+        document.getElementById(
+            "movieModal"
+        );
+
+
+    const poster =
+        document.getElementById(
+            "poster"
+        );
+
+
+    const modalTitle =
+        document.getElementById(
+            "modalTitle"
+        );
+
+
+    const posterTitle =
+        document.getElementById(
+            "posterTitle"
+        );
+
+
+    const description =
+        document.getElementById(
+            "modalDescription"
+        );
+
+
+    const rank =
+        document.getElementById(
+            "modalRank"
+        );
+
+
+    /*
+        Populate title.
+    */
+
+    modalTitle.textContent =
+        title;
+
+
+    posterTitle.textContent =
+        title;
+
+
+    /*
+        Populate ranking.
+    */
+
+    rank.textContent =
+        "#" +
+        (randomIndex + 1);
+
+
+    /*
+        Populate description.
+    */
+
+    if (
+        data &&
+        data.description
+    ) {
+
+        description.textContent =
+            data.description;
+
+    } else {
+
+        description.textContent =
+            "No description is available for this movie.";
+
+    }
+
+
+    /*
+        Populate release date.
+    */
+
+    const releaseDate =
+        document.getElementById(
+            "modalReleaseDate"
+        );
+
+
+    if (
+        data &&
+        data.release_date
+    ) {
+
+        releaseDate.textContent =
+            data.release_date;
+
+    } else {
+
+        releaseDate.textContent =
+            "Unknown";
+
+    }
+
+
+    /*
+        Populate poster.
+
+        If the movie has a poster URL,
+        use it as the background image.
+
+        Otherwise, use the existing
+        placeholder gradient.
+    */
+
+    if (
+        data &&
+        data.poster
+    ) {
+
+        poster.style.backgroundImage =
+            `url("${data.poster}")`;
+
+        poster.style.backgroundSize =
+            "cover";
+
+        poster.style.backgroundPosition =
+            "center";
+
+    } else {
+
+        poster.style.backgroundImage =
+            "";
+
+    }
+
+
+    /*
+        Open the modal.
+    */
+
+    modal.classList.add(
+        "open"
+    );
+
+
+    document.body
+        .classList
+        .add(
+            "modal-open"
+        );
+
 }
+
+
+
+
+
+
+
 
 
 /* =========================================================
@@ -2525,10 +2831,16 @@ function createMovieRow(
 
 
             <div
-                class="
-                    movie-card
-                    ${selected ? "selected" : ""}
-                "
+                        class="
+                            movie-card
+                            ${selected ? "selected" : ""}
+                        "
+
+                        ${
+                            !editing
+                            ? `onclick="openMovie(${index})"`
+                            : ""
+                        }
             >
 
                 ${
@@ -2814,40 +3126,18 @@ async function copyMovieList() {
 ========================================================= */
 
 
-
-
 function toggleEditMode() {
 
-    editing =
-        !editing;
+    editing = !editing;
 
 
-    document.body
-        .classList
-        .toggle(
-            "editing",
-            editing
-        );
-
-
-    const button =
-        document.getElementById(
-            "editModeBtn"
-        );
-
-
-    if (
+    document.body.classList.toggle(
+        "editing",
         editing
-    ) {
-
-        button.classList.add(
-            "active"
-        );
+    );
 
 
-        button.innerHTML =
-            "✓ <span>Done</span>";
-
+    if (editing) {
 
         showToast(
             "Edit mode enabled."
@@ -2855,19 +3145,9 @@ function toggleEditMode() {
 
     } else {
 
-        button.classList.remove(
-            "active"
-        );
-
-
-        button.innerHTML =
-            "✎ <span>Edit</span>";
-
-
         clearSelection();
 
         saveLocal();
-
 
         showToast(
             "Changes saved."
@@ -2879,6 +3159,7 @@ function toggleEditMode() {
     renderMovies();
 
 }
+
 
 
 /* =========================================================
@@ -3405,29 +3686,137 @@ function handleDragStart(
 }
 
 
-function handleDragOver(
-    event
-) {
 
-    if (
-        !editing
-    ) {
+function handleDragOver(event) {
 
+    if (!editing) {
         return;
-
     }
-
 
     event.preventDefault();
 
+    const row =
+        event.currentTarget;
 
-    event.currentTarget
-        .classList
-        .add(
+    const targetIndex =
+        Number(row.dataset.index);
+
+    // Do not highlight the movie being dragged
+    if (targetIndex === draggedIndex) {
+        return;
+    }
+
+    // Remove the previous drop-position highlight
+    document
+        .querySelectorAll(".drag-over")
+        .forEach(element => {
+            element.classList.remove("drag-over");
+        });
+
+    /*
+        Determine whether the cursor is in the
+        upper or lower half of the target row.
+
+        This lets us show the drop position rather
+        than simply highlighting every row we pass.
+    */
+
+    const rect =
+        row.getBoundingClientRect();
+
+    const middle =
+        rect.top +
+        rect.height / 2;
+
+    let dropIndex =
+        targetIndex;
+
+    if (event.clientY > middle) {
+        dropIndex =
+            targetIndex + 1;
+    }
+
+    /*
+        Account for removing the dragged movie.
+
+        If we drag a movie downward, the indexes
+        shift after the dragged movie is removed.
+    */
+
+    if (
+        draggedIndex !== null &&
+        dropIndex > draggedIndex
+    ) {
+        dropIndex--;
+    }
+
+    // Keep the position within the list
+    dropIndex =
+        Math.max(
+            0,
+            Math.min(
+                dropIndex,
+                movies.length - 1
+            )
+        );
+
+    currentDropIndex =
+        dropIndex;
+
+    /*
+        Find the movie currently occupying the
+        calculated drop position.
+    */
+
+    const targetRow =
+        document.querySelector(
+            `.movie-row[data-index="${dropIndex}"]`
+        );
+
+    if (
+        targetRow &&
+        dropIndex !== draggedIndex
+    ) {
+
+        targetRow.classList.add(
             "drag-over"
         );
 
+    }
+
+    /*
+        Auto-scroll when dragging near the
+        top or bottom of the window.
+    */
+
+    const scrollZone = 120;
+    const scrollSpeed = 100;
+
+    if (
+        event.clientY < scrollZone
+    ) {
+
+        window.scrollBy(
+            0,
+            -scrollSpeed
+        );
+
+    }
+
+    else if (
+        event.clientY >
+        window.innerHeight - scrollZone
+    ) {
+
+        window.scrollBy(
+            0,
+            scrollSpeed
+        );
+
+    }
+
 }
+
 
 
 function handleDrop(
@@ -3435,62 +3824,81 @@ function handleDrop(
     targetIndex
 ) {
 
-    if (
-        !editing
-    ) {
-
+    if (!editing) {
         return;
-
     }
-
 
     event.preventDefault();
 
-
     if (
         draggedIndex === null ||
-        draggedIndex === targetIndex
+        currentDropIndex === null
     ) {
+        return;
+    }
+
+    const fromIndex =
+        draggedIndex;
+
+    const toIndex =
+        currentDropIndex;
+
+    /*
+        Nothing changed.
+    */
+
+    if (
+        fromIndex === toIndex
+    ) {
+
+        draggedIndex = null;
+        currentDropIndex = null;
 
         return;
 
     }
 
-
     saveUndoState();
 
+    /*
+        Remove the movie from its
+        original position.
+    */
 
     const moved =
         movies.splice(
-            draggedIndex,
+            fromIndex,
             1
         )[0];
 
+    /*
+        Insert it at the new position.
+    */
 
     movies.splice(
-        targetIndex,
+        toIndex,
         0,
         moved
     );
 
-
     selectedMovies.clear();
-
 
     saveLocal();
 
     renderMovies();
 
-
     showToast(
         "Ranking updated."
     );
 
-
     draggedIndex =
         null;
 
+    currentDropIndex =
+        null;
+
 }
+
 
 
 function handleDragEnd(
@@ -3502,7 +3910,6 @@ function handleDragEnd(
         .remove(
             "dragging"
         );
-
 
     document
         .querySelectorAll(
@@ -3517,11 +3924,16 @@ function handleDragEnd(
                     )
         );
 
-
     draggedIndex =
         null;
 
+    currentDropIndex =
+        null;
+
 }
+
+
+
 
 
 /* =========================================================
@@ -3702,123 +4114,128 @@ document
     );
 
 
+
+
+
+
 /* =========================================================
-   RANDOM MOVIE
+   LOAD MOVIES FROM FILE
 ========================================================= */
 
-function openRandomMovie() {
+async function loadMovies() {
 
-    if (
-        movies.length === 0
-    ) {
+    try {
 
-        showToast(
-            "There are no movies to pick from."
+        // Load movie list
+        const moviesResponse =
+            await fetch("movies_list.txt");
+
+        if (!moviesResponse.ok) {
+            throw new Error(
+                `Could not load movies_list.txt: ${moviesResponse.status}`
+            );
+        }
+
+        const moviesText =
+            await moviesResponse.text();
+
+        movies =
+            moviesText
+                .split(/\r?\n/)
+                .map(line => line.trim())
+                .filter(line => line.length > 0);
+
+
+        // Load movie metadata
+        const dataResponse =
+            await fetch("movies_data.json");
+
+        if (dataResponse.ok) {
+
+            movieData =
+                await dataResponse.json();
+
+        } else {
+
+            console.warn(
+                "Could not load movies_data.json"
+            );
+
+            movieData = {};
+
+        }
+
+
+        /*
+            If movies were previously saved
+            in localStorage, use that list.
+        */
+
+        const savedMovies =
+            localStorage.getItem(
+                "movieRankMovies"
+            );
+
+        if (savedMovies) {
+
+            try {
+
+                const parsed =
+                    JSON.parse(
+                        savedMovies
+                    );
+
+                if (
+                    Array.isArray(parsed)
+                ) {
+
+                    movies = parsed;
+
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    "Could not read saved movie list:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        renderMovies();
+
+    } catch (error) {
+
+        console.error(
+            "Failed to load movies:",
+            error
         );
 
-        return;
+        document.getElementById(
+            "movieList"
+        ).innerHTML = `
+
+            <div class="state">
+
+                <div class="state-title">
+                    Could not load movies
+                </div>
+
+                <div class="state-description">
+                    Make sure movies_list.txt
+                    and movies_data.json
+                    are in the same folder as
+                    this HTML file.
+                </div>
+
+            </div>
+
+        `;
 
     }
-
-
-    /*
-        Pick a random index from the
-        CURRENT ranking.
-
-        This means edits, additions,
-        removals, and reordering are
-        all automatically reflected.
-    */
-
-    const randomIndex =
-        Math.floor(
-            Math.random() *
-            movies.length
-        );
-
-
-    const title =
-        movies[randomIndex];
-
-
-    const modal =
-        document.getElementById(
-            "movieModal"
-        );
-
-
-    const poster =
-        document.getElementById(
-            "poster"
-        );
-
-
-    const modalTitle =
-        document.getElementById(
-            "modalTitle"
-        );
-
-
-    const posterTitle =
-        document.getElementById(
-            "posterTitle"
-        );
-
-
-    const description =
-        document.getElementById(
-            "modalDescription"
-        );
-
-
-    const rank =
-        document.getElementById(
-            "modalRank"
-        );
-
-
-    /*
-        Reset and populate the modal.
-    */
-
-    poster.classList.remove(
-        "random-poster-alt"
-    );
-
-
-    modalTitle.textContent =
-        title;
-
-
-    posterTitle.textContent =
-        title;
-
-
-    rank.textContent =
-        "#" +
-        (randomIndex + 1);
-
-
-    description.textContent =
-        "This is placeholder movie information. A description of " +
-        title +
-        " can be displayed here in the future.";
-
-
-    /*
-        Open the modal.
-    */
-
-    modal.classList.add(
-        "open"
-    );
-
-
-    document.body
-        .classList
-        .add(
-            "modal-open"
-        );
 
 }
 
