@@ -348,5 +348,58 @@
       "Family",
       "Science Fiction"
     ]
+  },
+  "Men in Black": {
+    "description": "After encountering an alien during a police chase, a New York City cop is recruited into a secret agency that monitors extraterrestrial activity on Earth. Paired with a veteran agent, he must help stop an intergalactic threat while learning to navigate a hidden world of aliens, unusual technology, and erased memories.",
+    "poster": "https://image.tmdb.org/t/p/w780/uLOmOF5IzWoyrgIF5MfUnh5pa1X.jpg",
+    "release_date": "1997-07-02",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Comedy",
+      "Science Fiction"
+    ]
+  },
+  "Tron": {
+    "description": "A brilliant video game creator is pulled into a digital world after hacking his former employer’s mainframe. Forced to compete in dangerous games, he joins a security program and other allies in a fight against a powerful controlling force.",
+    "poster": "https://image.tmdb.org/t/p/w780/jigY9B6TKz4qlfikZcd18qtzTK4.jpg",
+    "release_date": "1982-07-09",
+    "genres": [
+      "Science Fiction",
+      "Action",
+      "Adventure"
+    ]
+  },
+  "Cars": {
+    "description": "A hotshot rookie race car is unexpectedly detoured into a sleepy Route 66 town while heading to a major championship. As he gets to know the town’s colorful residents, he begins to discover that friendship, teamwork, and the journey itself may matter more than winning.",
+    "poster": "https://image.tmdb.org/t/p/w780/2Touk3m5gzsqr1VsvxypdyHY5ci.jpg",
+    "release_date": "2006-06-08",
+    "genres": [
+      "Animation",
+      "Adventure",
+      "Comedy",
+      "Family"
+    ]
+  },
+  "ARGYLLE": {
+    "description": "A reclusive author of espionage novels finds her fictional plots echoing the covert actions of a real spy organization. With her cat and a spy at her side, she is pulled into a globe-spanning chase where the boundary between imagination and reality begins to blur.",
+    "poster": "https://image.tmdb.org/t/p/w780/siduVKgOnABO4WH4lOwPQwaGwJp.jpg",
+    "release_date": "2024-01-31",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Comedy"
+    ]
+  },
+  "Planes": {
+    "description": "A crop-dusting plane dreams of entering a famous international air race, despite being afraid of heights. With guidance from a retired pilot and encouragement from loyal friends, the determined underdog prepares to challenge experienced competitors and pursue an unlikely dream.",
+    "poster": "https://image.tmdb.org/t/p/w780/i2xgU0y0p77WTrB0oIkbpdaWq8R.jpg",
+    "release_date": "2013-08-09",
+    "genres": [
+      "Animation",
+      "Family",
+      "Adventure",
+      "Comedy"
+    ]
   }
 }
