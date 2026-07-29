@@ -4,19 +4,19 @@ Dune
 Arrival
 Tron Legacy
 Tron Ares
-Wall E
+Wall-E
 Top Gun Maverick
 Top Gun
 Ratatouille
 Up
 Wargames
-The Men in Black
+Men in Black
 Back to the Future
 Toy Story 2
 Armageddon
 Finch
 2001: A Space Odyssey
-Tron (Original)
+Tron
 The Santa Clause 2
 The Santa Clause
 The Santa Clause 3
@@ -28,7 +28,7 @@ Finding Dory
 Escape to Witch Mountain
 The Parent Trap
 20,000 Leagues Under the Sea
-Robin Hood (Animated)
+Robin Hood (1973)
 The Absent-Minded Professor
 Cars 2
 Monsters, Inc.
@@ -53,7 +53,7 @@ Annie
 Cars 3
 An American Tail
 Toy Story 3
------------------------------------------------------------
+-------------------------------------------------------------
 Mulan
 Pocahontas
 The Jungle Book
@@ -72,3 +72,14 @@ The Princess and the Frog
 Bambi
 Dumbo
 The Lost Bus
+Cars
+ARGYLLE
+Planes
+Alice in Wonderland (1951)
+The Little Mermaid (1989)
+Mulan (1998)
+Beauty and the Beast (1991)
+Cinderella (1950)
+Lady and the Tramp (1955)
+Peter Pan (1953)
+Dumbo (1941)
