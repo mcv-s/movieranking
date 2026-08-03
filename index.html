@@ -3775,21 +3775,23 @@ function handleDragOver(event) {
         top or bottom of the window.
     */
 
-   const scrollZone = 140;       // bigger edge zone
-   const maxSpeed   = 55;        // ← very fast (feel free to push to 70–80)
-   
+   const maxSpeed = 2600;
    const y = event.clientY;
    const h = window.innerHeight;
+   const third = h / 3;
    
-   if (y < scrollZone) {
-       // Upward scroll – stronger near the very top
-       const intensity = Math.pow((scrollZone - y) / scrollZone, 1.4);
+   const getScreenSpaceIntensity = (distanceToEdge) => {
+       const clampedDistance = Math.max(0, Math.min(third, distanceToEdge));
+       return Math.max(0, 1 - (clampedDistance / third));
+   };
+   
+   if (y <= third) {
+       const intensity = getScreenSpaceIntensity(y);
        autoScrollSpeed = -Math.ceil(maxSpeed * intensity);
        startAutoScroll();
    }
-   else if (y > h - scrollZone) {
-       // Downward scroll
-       const intensity = Math.pow((y - (h - scrollZone)) / scrollZone, 1.4);
+   else if (y >= h - third) {
+       const intensity = getScreenSpaceIntensity(h - y);
        autoScrollSpeed = Math.ceil(maxSpeed * intensity);
        startAutoScroll();
    }
