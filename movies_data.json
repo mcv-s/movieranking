@@ -401,5 +401,101 @@
       "Adventure",
       "Comedy"
     ]
+  },
+  "Mission Impossible": {
+    "description": "After a disastrous espionage mission leaves him suspected of betrayal, a skilled agent must uncover the real mole within the intelligence service. Working with a small group of disavowed allies, he pursues a sensitive list and navigates elaborate heists, shifting loyalties, and dangerous international pursuits to clear his name.",
+    "poster": "https://image.tmdb.org/t/p/w780/l5uxY5m5OInWpcExIpKG6AR3rgL.jpg",
+    "release_date": "1996-05-22",
+    "genres": [
+      "Adventure",
+      "Action",
+      "Thriller"
+    ]
+  },
+  "The Family Plan": {
+    "description": "A devoted suburban father with a hidden past as an assassin is forced to flee when old enemies track him down. He takes his unsuspecting wife and children on an unexpected road trip, trying to protect them while keeping his former life secret.",
+    "poster": "https://image.tmdb.org/t/p/w780/jLLtx3nTRSLGPAKl4RoIv1FbEBr.jpg",
+    "release_date": "2023-12-14",
+    "genres": [
+      "Action",
+      "Comedy",
+      "Adventure"
+    ]
+  },
+  "Jurassic Park": {
+    "description": "A wealthy entrepreneur invites experts and his grandchildren to preview a remote dinosaur theme park created through prehistoric DNA. When the park’s security systems fail, the visitors must face escaped dinosaurs while trying to survive the island’s increasingly dangerous attractions.",
+    "poster": "https://image.tmdb.org/t/p/w780/b1xCNnyrPebIc7EWNZIa6jhb1Ww.jpg",
+    "release_date": "1993-06-11",
+    "genres": [
+      "Adventure",
+      "Science Fiction"
+    ]
+  },
+  "Crocodile Dundee": {
+    "description": "A New York reporter brings a rugged crocodile hunter from the Australian wilderness to Manhattan, creating a lively clash of cultures. As he encounters unfamiliar city customs, his practical instincts, easygoing confidence, and unconventional manners turn everyday situations into good-natured comedy and unexpected adventure.",
+    "poster": "https://image.tmdb.org/t/p/w780/pduPduL1ub5kok3lPYT15ryC9L6.jpg",
+    "release_date": "1986-09-26",
+    "genres": [
+      "Adventure",
+      "Comedy"
+    ]
+  },
+  "The Family Plan 2": {
+    "description": "A former assassin plans a Christmas trip to London so his family can spend time together, but his daughter has other plans. When an unexpected enemy threatens them, the family is pulled into a dangerous adventure involving chases, close calls, and long-buried trouble.",
+    "poster": "https://image.tmdb.org/t/p/w780/semFxuYx6HcrkZzslgAkBqfJvZk.jpg",
+    "release_date": "2025-11-11",
+    "genres": [
+      "Action",
+      "Comedy"
+    ]
+  },
+  "The Hunt for Red October": {
+    "description": "A technologically advanced Soviet submarine heads toward the U.S. coast, prompting officials to fear an attack. A CIA analyst suspects its commander may instead be seeking to defect, but he has only hours to persuade skeptical superiors while Soviet forces close in.",
+    "poster": "https://image.tmdb.org/t/p/w780/yVl7zidse4KiWtGMqHFtZCx4X3N.jpg",
+    "release_date": "1990-03-02",
+    "genres": [
+      "Action",
+      "Thriller"
+    ]
+  },
+  "The Game Plan": {
+    "description": "A wealthy, carefree football star focused on winning a championship is stunned when a young daughter he never knew about enters his life. As he adjusts to parenting, he must balance his demanding career with his child’s needs and discover what matters beyond fame and success.",
+    "poster": "https://image.tmdb.org/t/p/w780/fcLFvIqCUrhY96mkSmr3okxaMEw.jpg",
+    "release_date": "2007-09-28",
+    "genres": [
+      "Comedy",
+      "Family"
+    ]
+  },
+  "Gravity": {
+    "description": "An engineer on her first space mission and a veteran astronaut must fight to survive after a debris strike leaves them stranded during a spacewalk. With limited options and danger closing in, they race to find a way back to Earth.",
+    "poster": "https://image.tmdb.org/t/p/w780/kZ2nZw8D681aphje8NJi8EfbL1U.jpg",
+    "release_date": "2013-10-03",
+    "genres": [
+      "Science Fiction",
+      "Thriller",
+      "Drama"
+    ]
+  },
+  "Psych: The Movie": {
+    "description": "During the holidays, a mystery assailant targets a member of the team, bringing the friends back together in San Francisco. The group launches a lively investigation filled with playful banter, unexpected complications, familiar faces, and a determined pursuit of justice—with plenty of time for food along the way.",
+    "poster": "https://image.tmdb.org/t/p/w780/82Z6LEnkewH40pv6fa2Ci1CkSnd.jpg",
+    "release_date": "2017-12-07",
+    "genres": [
+      "Comedy",
+      "Crime",
+      "Mystery",
+      "TV Movie"
+    ]
+  },
+  "Superman": {
+    "description": "A journalist in Metropolis struggles to balance his human upbringing with his Kryptonian heritage while confronting the challenges of being a hopeful hero in a cynical, politically complicated world. Along the way, he must navigate personal relationships, public distrust, and threats that test his ideals.",
+    "poster": "https://image.tmdb.org/t/p/w780/ldyfo0BKmz5rWtJJKCvwaNS4cJT.jpg",
+    "release_date": "2025-07-09",
+    "genres": [
+      "Science Fiction",
+      "Adventure",
+      "Action"
+    ]
   }
 }
