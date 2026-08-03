@@ -2249,6 +2249,10 @@ let movieData = {};
 
 
 
+let autoScrollRAF = null;
+let autoScrollSpeed = 0;   // positive = down, negative = up
+
+
 
 /* =========================================================
    OPEN MOVIE
@@ -3771,25 +3775,68 @@ function handleDragOver(event) {
         top or bottom of the window.
     */
 
-   const scrollZone = 90;          // smaller, more precise edge zone
-   const maxSpeed   = 18;          // max px per dragover event
+   const scrollZone = 140;       // bigger edge zone
+   const maxSpeed   = 55;        // ← very fast (feel free to push to 70–80)
    
    const y = event.clientY;
    const h = window.innerHeight;
    
    if (y < scrollZone) {
-       // speed increases as you get closer to the top edge
-       const intensity = (scrollZone - y) / scrollZone;
-       window.scrollBy(0, -Math.ceil(maxSpeed * intensity));
+       // Upward scroll – stronger near the very top
+       const intensity = Math.pow((scrollZone - y) / scrollZone, 1.4);
+       autoScrollSpeed = -Math.ceil(maxSpeed * intensity);
+       startAutoScroll();
    }
    else if (y > h - scrollZone) {
-       const intensity = (y - (h - scrollZone)) / scrollZone;
-       window.scrollBy(0, Math.ceil(maxSpeed * intensity));
+       // Downward scroll
+       const intensity = Math.pow((y - (h - scrollZone)) / scrollZone, 1.4);
+       autoScrollSpeed = Math.ceil(maxSpeed * intensity);
+       startAutoScroll();
+   }
+   else {
+       stopAutoScroll();
    }
 
 }
 
 
+
+
+
+   
+function startAutoScroll() {
+    if (autoScrollRAF) return;
+
+    const step = () => {
+        if (autoScrollSpeed !== 0) {
+            window.scrollBy(0, autoScrollSpeed);
+            autoScrollRAF = requestAnimationFrame(step);
+        } else {
+            autoScrollRAF = null;
+        }
+    };
+
+    autoScrollRAF = requestAnimationFrame(step);
+}
+
+function stopAutoScroll() {
+    autoScrollSpeed = 0;
+    if (autoScrollRAF) {
+        cancelAnimationFrame(autoScrollRAF);
+        autoScrollRAF = null;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+   
 
 function handleDrop(
     event,
@@ -3825,7 +3872,7 @@ function handleDrop(
 
         draggedIndex = null;
         currentDropIndex = null;
-
+        stopAutoScroll();
         return;
 
     }
@@ -3901,6 +3948,7 @@ function handleDragEnd(
 
     currentDropIndex =
         null;
+    stopAutoScroll();
 
 }
 
