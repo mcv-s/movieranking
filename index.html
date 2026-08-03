@@ -3771,31 +3771,21 @@ function handleDragOver(event) {
         top or bottom of the window.
     */
 
-    const scrollZone = 120;
-    const scrollSpeed = 100;
-
-    if (
-        event.clientY < scrollZone
-    ) {
-
-        window.scrollBy(
-            0,
-            -scrollSpeed
-        );
-
-    }
-
-    else if (
-        event.clientY >
-        window.innerHeight - scrollZone
-    ) {
-
-        window.scrollBy(
-            0,
-            scrollSpeed
-        );
-
-    }
+   const scrollZone = 90;          // smaller, more precise edge zone
+   const maxSpeed   = 18;          // max px per dragover event
+   
+   const y = event.clientY;
+   const h = window.innerHeight;
+   
+   if (y < scrollZone) {
+       // speed increases as you get closer to the top edge
+       const intensity = (scrollZone - y) / scrollZone;
+       window.scrollBy(0, -Math.ceil(maxSpeed * intensity));
+   }
+   else if (y > h - scrollZone) {
+       const intensity = (y - (h - scrollZone)) / scrollZone;
+       window.scrollBy(0, Math.ceil(maxSpeed * intensity));
+   }
 
 }
 
