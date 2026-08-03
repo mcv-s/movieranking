@@ -4,24 +4,31 @@ Dune
 Arrival
 Tron Legacy
 Tron Ares
+The F1 Movie
 Wall-E
+Mission Impossible
 Top Gun Maverick
 Top Gun
+The Family Plan
 Ratatouille
 Up
 Wargames
 Men in Black
 Back to the Future
+Jurassic Park
 Toy Story 2
 Armageddon
+Crocodile Dundee
 Finch
+The Family Plan 2
 2001: A Space Odyssey
 Tron
 The Santa Clause 2
 The Santa Clause
 The Santa Clause 3
-Toy Story
 The Chronicles of Narnia
+The Hunt for Red October
+Toy Story
 Swiss Family Robinson
 Finding Nemo
 Finding Dory
@@ -34,24 +41,34 @@ Cars 2
 Monsters, Inc.
 Mary Poppins
 The Love Bug
+The Lost Bus
+The Game Plan
 Aladdin
-Cars 1
-ARGYLE
+Cars
+ARGYLLE
 Planes 2
 The Lion King
+Gravity
 Pollyanna
-Planes 1
+Planes
 Alice in Wonderland
-The Great Mouse Detective
 The Secret Garden
+The Great Mouse Detective
+Psych: The Movie
 A Bug’s Life
 Tarzan
 National Treasure
+Superman
 Frozen
 The Little Mermaid
 Annie
 Cars 3
 An American Tail
+Bambi
+Dumbo
+Dumbo (1941)
+Meet the Robinsons
+The Princess and the Frog
 Toy Story 3
 -------------------------------------------------------------
 Mulan
@@ -65,16 +82,7 @@ One Hundred and One Dalmatians
 The Aristocats
 The Emperor’s New Groove
 Chicken Little
-Meet the Robinsons
-Peter Pan
 Sleeping Beauty
-The Princess and the Frog
-Bambi
-Dumbo
-The Lost Bus
-Cars
-ARGYLLE
-Planes
 Alice in Wonderland (1951)
 The Little Mermaid (1989)
 Mulan (1998)
@@ -82,4 +90,4 @@ Beauty and the Beast (1991)
 Cinderella (1950)
 Lady and the Tramp (1955)
 Peter Pan (1953)
-Dumbo (1941)
+Indiana Jones: Raiders of the Lost Ark
