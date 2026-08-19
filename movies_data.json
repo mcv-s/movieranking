@@ -497,5 +497,15 @@
       "Adventure",
       "Action"
     ]
+  },
+  "The Martian": {
+    "description": "After a storm forces a Mars mission to evacuate, an astronaut is presumed dead and left behind. Alone with limited supplies, he must use his ingenuity, humor, and scientific knowledge to survive on the hostile planet while people on Earth work to find a way to bring him home.",
+    "poster": "https://image.tmdb.org/t/p/w780/fASz8A0yFE3QB6LgGoOfwvFSseV.jpg",
+    "release_date": "2015-09-30",
+    "genres": [
+      "Science Fiction",
+      "Drama",
+      "Adventure"
+    ]
   }
 }
