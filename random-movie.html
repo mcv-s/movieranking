@@ -27,14 +27,35 @@
       border-radius: 25px;
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
     }
-    
   </style>
 </head>
 
 <body>
   <div class="posters">
-    <img src="https://image.tmdb.org/t/p/w780/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg">
-    <img src="https://image.tmdb.org/t/p/w780/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg">
+    <img id="poster1">
+    <img id="poster2">
   </div>
+
+  <script>
+    async function loadMovies() {
+      const response = await fetch("./movies_data.json");
+      const movies = await response.json();
+
+      const movieList = Object.values(movies);
+
+      // Pick two different random movies
+      const firstIndex = Math.floor(Math.random() * movieList.length);
+
+      let secondIndex;
+      do {
+        secondIndex = Math.floor(Math.random() * movieList.length);
+      } while (secondIndex === firstIndex);
+
+      document.getElementById("poster1").src = movieList[firstIndex].poster;
+      document.getElementById("poster2").src = movieList[secondIndex].poster;
+    }
+
+    loadMovies();
+  </script>
 </body>
 </html>
