@@ -38,7 +38,7 @@
 
   <script>
     async function loadMovies() {
-      const response = await fetch("./movies_data.json");
+      const response = await fetch("https://raw.githubusercontent.com/mcv-s/movieranking/2f93d77edc1de12714ee808346384827ff0decde/movies_data.json");
       const movies = await response.json();
 
       const movieList = Object.values(movies);
