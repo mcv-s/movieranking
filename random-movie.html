@@ -20,42 +20,80 @@
       gap: 100px;
     }
 
-    .posters img {
+    .movie {
+      text-align: center;
+    }
+
+    .movie img {
       width: 300px;
       height: auto;
       display: block;
       border-radius: 25px;
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
     }
+
+    .movie-name {
+      margin-top: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 30px;
+      font-family: 'Courier New', Courier, monospace;
+    }
   </style>
 </head>
 
 <body>
   <div class="posters">
-    <img id="poster1">
-    <img id="poster2">
+
+    <div class="movie">
+      <img id="poster1">
+      <div class="movie-name" id="name1">M1</div>
+    </div>
+
+    <div class="movie">
+      <img id="poster2">
+      <div class="movie-name" id="name2">M2</div>
+    </div>
+
   </div>
 
   <script>
-    async function loadMovies() {
-      const response = await fetch("https://raw.githubusercontent.com/mcv-s/movieranking/2f93d77edc1de12714ee808346384827ff0decde/movies_data.json");
-      const movies = await response.json();
+    const request = new XMLHttpRequest();
 
-      const movieList = Object.values(movies);
+    request.open(
+      "GET",
+      "https://raw.githubusercontent.com/mcv-s/movieranking/2f93d77edc1de12714ee808346384827ff0decde/movies_data.json",
+      false
+    );
 
-      // Pick two different random movies
-      const firstIndex = Math.floor(Math.random() * movieList.length);
+    request.send();
 
-      let secondIndex;
-      do {
-        secondIndex = Math.floor(Math.random() * movieList.length);
-      } while (secondIndex === firstIndex);
+    const movies = JSON.parse(request.responseText);
 
-      document.getElementById("poster1").src = movieList[firstIndex].poster;
-      document.getElementById("poster2").src = movieList[secondIndex].poster;
-    }
+    // Keep the movie name along with its data
+    const movieList = Object.entries(movies);
 
-    loadMovies();
+    // Pick two different random movies
+    const firstIndex = Math.floor(Math.random() * movieList.length);
+
+    let secondIndex;
+    do {
+      secondIndex = Math.floor(Math.random() * movieList.length);
+    } while (secondIndex === firstIndex);
+
+    const firstMovie = movieList[firstIndex];
+    const secondMovie = movieList[secondIndex];
+
+    // Display posters
+    document.getElementById("poster1").src = firstMovie[1].poster;
+    document.getElementById("poster2").src = secondMovie[1].poster;
+
+    // Display names
+    document.getElementById("name1").textContent = firstMovie[0];
+    document.getElementById("name2").textContent = secondMovie[0];
   </script>
+
+
+
 </body>
 </html>
