@@ -5,7 +5,7 @@ Dune: Part Two
 Arrival
 Tron Legacy
 Tron Ares
-The F1 Movie
+F1: Movie
 Wall-E
 Mission Impossible
 Top Gun Maverick
@@ -37,7 +37,7 @@ Finding Dory
 Escape to Witch Mountain
 The Parent Trap
 20,000 Leagues Under the Sea
-Robin Hood (1973)
+Robin Hood 1973
 The Absent-Minded Professor
 Cars 2
 Monsters, Inc.
@@ -68,7 +68,7 @@ Cars 3
 An American Tail
 Bambi
 Dumbo
-Dumbo (1941)
+Dumbo 1941
 Meet the Robinsons
 The Princess and the Frog
 Toy Story 3
@@ -85,11 +85,11 @@ The Aristocats
 The Emperor’s New Groove
 Chicken Little
 Sleeping Beauty
-Alice in Wonderland (1951)
-The Little Mermaid (1989)
-Mulan (1998)
-Beauty and the Beast (1991)
-Cinderella (1950)
-Lady and the Tramp (1955)
-Peter Pan (1953)
+Alice in Wonderland 1951
+The Little Mermaid 1989
+Mulan 1998
+Beauty and the Beast 1991
+Cinderella 1950
+Lady and the Tramp 1955
+Peter Pan 1953
 Indiana Jones: Raiders of the Lost Ark
