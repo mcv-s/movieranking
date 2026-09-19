@@ -507,5 +507,14 @@
       "Drama",
       "Adventure"
     ]
+  },
+  "Dune: Part Two": {
+    "description": "A young nobleman joins forces with desert-dwelling rebels on a journey of revenge against those who destroyed his family. As he grows closer to a fierce warrior and embraces a possible leadership role, he must weigh personal love against the future of an entire universe.",
+    "poster": "https://image.tmdb.org/t/p/w780/6izwz7rsy95ARzTR3poZ8H6c5pp.jpg",
+    "release_date": "2024-02-27",
+    "genres": [
+      "Science Fiction",
+      "Adventure"
+    ]
   }
 }
