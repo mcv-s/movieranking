@@ -1,6 +1,7 @@
 Inception
 Interstellar
 Dune
+Dune: Part Two
 Arrival
 Tron Legacy
 Tron Ares
@@ -10,10 +11,10 @@ Mission Impossible
 Top Gun Maverick
 Top Gun
 The Family Plan
+The Martian
 Ratatouille
 Up
 Wargames
-The Martian
 Men in Black
 Back to the Future
 Jurassic Park
