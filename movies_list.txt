@@ -51,7 +51,7 @@ The Game Plan
 Aladdin
 Cars
 ARGYLLE
-Planes 2
+Planes: Fire and Rescue
 The Lion King
 Gravity
 Pollyanna
@@ -75,24 +75,26 @@ Dumbo 1941
 Meet the Robinsons
 The Princess and the Frog
 Toy Story 3
--------------------------------------------------------------
-Mulan
-Pocahontas
-The Jungle Book
-Inside Out
-Beauty and the Beast
-Cinderella
-Lady and the Tramp
-One Hundred and One Dalmatians
-The Aristocats
-The Emperor’s New Groove
-Chicken Little
-Sleeping Beauty
-Alice in Wonderland 1951
-The Little Mermaid 1989
-Mulan 1998
-Beauty and the Beast 1991
-Cinderella 1950
-Lady and the Tramp 1955
-Peter Pan 1953
-Indiana Jones: Raiders of the Lost Ark
+Peter Pan: 1953
+
+Mulan-unranked
+Pocahontas-unranked
+The Jungle Book-unranked
+Inside Out-unranked
+Beauty and the Beast-unranked
+Cinderella-unranked
+Lady and the Tramp-unranked
+One Hundred and One Dalmatians-unranked
+The Aristocats-unranked
+The Emperor’s New Groove-unranked
+Chicken Little-unranked
+Sleeping Beauty-unranked
+Alice in Wonderland 1951-unranked
+The Little Mermaid 1989-unranked
+Mulan 1998-unranked
+Beauty and the Beast 1991-unranked
+Cinderella 1950-unranked
+Lady and the Tramp 1955-unranked
+Raiders of the Lost Ark-unranked
+
+Dune: Part Three-watchlist

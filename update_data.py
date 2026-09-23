@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -17,6 +18,17 @@ API_KEY = os.environ.get("API_KEY")
 
 SEARCH_URL = "https://api.watchmode.com/v1/search/"
 DETAIL_URL = "https://api.watchmode.com/v1/title/{title_id}/details/"
+
+SUFFIX_PATTERN = re.compile(
+    r"\s*-\s*(?:watchlist|unranked)\s*$",
+    re.IGNORECASE
+)
+
+
+def clean_movie_name(name):
+    """Remove a supported list marker from the end of a movie name."""
+
+    return SUFFIX_PATTERN.sub("", name).strip()
 
 
 # ============================================================
@@ -39,7 +51,7 @@ if not MOVIES_FILE.exists():
 
 with MOVIES_FILE.open("r", encoding="utf-8") as file:
     movies = [
-        line.strip()
+        clean_movie_name(line)
         for line in file
         if line.strip()
     ]
@@ -70,6 +82,16 @@ else:
     movie_data = {}
 
 
+# Remove old suffixes from existing JSON keys before comparing names.
+cleaned_movie_data = {}
+
+for title, details in movie_data.items():
+    cleaned_movie_data[clean_movie_name(title)] = details
+
+movie_data_changed = cleaned_movie_data != movie_data
+movie_data = cleaned_movie_data
+
+
 # ============================================================
 # FIND NEW MOVIES
 # ============================================================
@@ -92,8 +114,7 @@ print(f"New movies to look up: {len(new_movies)}")
 
 
 if not new_movies:
-    print("No new movies found. Nothing to update.")
-    sys.exit(0)
+    print("No new movies found. Writing any cleaned JSON keys.")
 
 
 # ============================================================

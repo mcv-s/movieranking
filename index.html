@@ -490,6 +490,19 @@
             gap: 5px;
         }
 
+        .movie-section-heading {
+            margin: 22px 0 7px 52px;
+
+            color: var(--muted-light);
+
+            font-size: 11px;
+            font-weight: 750;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
         .movie-row {
             display: grid;
 
@@ -571,12 +584,14 @@
 ========================================================= */
 
         .movie-card {
+            position: relative;
+
             min-width: 0;
             min-height: 55px;
 
             display: grid;
 
-            grid-template-columns: 1fr auto;
+            grid-template-columns: 42px 1fr auto;
 
             align-items: center;
 
@@ -653,6 +668,19 @@
 
         .movie-info {
             min-width: 0;
+        }
+
+        .movie-thumbnail {
+            width: 42px;
+            height: 58px;
+
+            display: block;
+
+            object-fit: cover;
+
+            background: var(--surface-active);
+
+            border-radius: 5px;
         }
 
         .movie-title {
@@ -798,10 +826,16 @@
         }
 
         .select-box {
+            position: absolute;
+            z-index: 1;
+
+            left: 13px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
             width: 15px;
             height: 15px;
-
-            margin-right: 8px;
 
             accent-color: var(--accent);
 
@@ -825,7 +859,7 @@
         .select-box:hover {
             border-color: #8b5cf6;
 
-            transform: scale(1.08);
+            transform: translateY(-50%) scale(1.08);
         }
 
         .select-box:checked {
@@ -833,7 +867,7 @@
 
             border-color: var(--accent);
 
-            transform: scale(1.08);
+            transform: translateY(-50%) scale(1.08);
         }
 
         .select-box:checked::after {
@@ -852,7 +886,7 @@
 
         body.editing .movie-card {
             grid-template-columns:
-                auto 1fr auto;
+                42px 1fr auto;
         }
 
 
@@ -1635,6 +1669,10 @@
                 gap: 5px;
             }
 
+            .movie-section-heading {
+                margin-left: 37px;
+            }
+
             .rank-number {
                 font-size: 11px;
             }
@@ -1653,6 +1691,11 @@
 
                 padding:
                     8px 10px;
+            }
+
+            .movie-thumbnail {
+                width: 36px;
+                height: 51px;
             }
 
             .movie-title {
@@ -2013,7 +2056,10 @@
 
                 <p class="modal-description">
                     The movie will be added to the bottom
-                    of your current list.
+                    of your current list. Add
+                    Add <strong>-unranked</strong> for an
+                    Unranked section, or <strong>-watchlist</strong>
+                    to place it below that section.
                 </p>
 
 
@@ -2102,7 +2148,7 @@
 
 
             const data =
-                movieData[title] || {};
+                movieData[cleanMovieTitle(title)] || {};
 
 
             const modal =
@@ -2140,11 +2186,11 @@
             */
 
             modalTitle.textContent =
-                title;
+                cleanMovieTitle(title);
 
 
             posterTitle.textContent =
-                title;
+                cleanMovieTitle(title);
 
 
             /*
@@ -2286,7 +2332,7 @@
             */
 
             const data =
-                movieData[title];
+                movieData[cleanMovieTitle(title)];
 
 
             const modal =
@@ -2330,11 +2376,11 @@
             */
 
             modalTitle.textContent =
-                title;
+                cleanMovieTitle(title);
 
 
             posterTitle.textContent =
-                title;
+                cleanMovieTitle(title);
 
 
             /*
@@ -2455,6 +2501,14 @@
 
         function renderMovies() {
 
+            if (
+                normalizeMovieGroups()
+            ) {
+
+                saveLocal();
+
+            }
+
             const container =
                 document.getElementById(
                     "movieList"
@@ -2482,9 +2536,39 @@
                     .filter(
                         movie =>
                             movie.title
+                                    .replace(
+                                        /\s*-\s*(?:watchlist|unranked)\s*$/i,
+                                        ""
+                                    )
                                 .toLowerCase()
                                 .includes(search)
                     );
+
+
+            const rankedMovies =
+                visibleMovies.filter(
+                    movie =>
+                        !isWatchlistMovie(movie.title) &&
+                        !isUnrankedMovie(movie.title)
+                );
+
+
+            const unrankedMovies =
+                visibleMovies.filter(
+                    movie =>
+                        isUnrankedMovie(
+                            movie.title
+                        )
+                );
+
+
+            const watchlistMovies =
+                visibleMovies.filter(
+                    movie =>
+                        isWatchlistMovie(
+                            movie.title
+                        )
+                );
 
 
             if (
@@ -2515,8 +2599,29 @@
             }
 
 
+            const unrankedSection =
+                unrankedMovies.length > 0
+                    ? `
+                        <div class="movie-section-heading">
+                            Unranked
+                        </div>
+                    ` +
+                    unrankedMovies
+                        .map(
+                            (movie, visibleIndex) =>
+                                createMovieRow(
+                                    movie.title,
+                                    movie.index,
+                                    rankedMovies.length +
+                                    visibleIndex
+                                )
+                        )
+                        .join("")
+                    : "";
+
+
             container.innerHTML =
-                visibleMovies
+                rankedMovies
                     .map(
                         (movie, visibleIndex) =>
                             createMovieRow(
@@ -2525,7 +2630,29 @@
                                 visibleIndex
                             )
                     )
-                    .join("");
+                    .join("") +
+                unrankedSection +
+                (
+                    watchlistMovies.length > 0
+                        ? `
+                            <div class="movie-section-heading">
+                                Watchlist
+                            </div>
+                        ` +
+                        watchlistMovies
+                            .map(
+                                (movie, visibleIndex) =>
+                                    createMovieRow(
+                                        movie.title,
+                                        movie.index,
+                                        rankedMovies.length +
+                                        unrankedMovies.length +
+                                        visibleIndex
+                                    )
+                            )
+                            .join("")
+                        : ""
+                );
 
 
             updateSelectionCount();
@@ -2543,6 +2670,23 @@
             visibleIndex
         ) {
 
+            const isWatchlist =
+                isWatchlistMovie(title);
+
+            const isUnranked =
+                isUnrankedMovie(title);
+
+            const isNonRanked =
+                isWatchlist || isUnranked;
+
+            const displayTitle =
+                title
+                    .replace(
+                        /\s*-\s*(?:watchlist|unranked)\s*$/i,
+                        ""
+                    )
+                    .trim();
+
             const selected =
                 selectedMovies.has(index);
 
@@ -2557,6 +2701,7 @@
 
 
             if (
+                !isNonRanked &&
                 rank === 1
             ) {
 
@@ -2569,6 +2714,7 @@
             }
 
             else if (
+                !isNonRanked &&
                 rank === 2
             ) {
 
@@ -2581,6 +2727,7 @@
             }
 
             else if (
+                !isNonRanked &&
                 rank === 3
             ) {
 
@@ -2642,7 +2789,7 @@
                     ${rankClass}
                 "
             >
-                ${rank}
+                ${isNonRanked ? "" : rank}
             </div>
 
 
@@ -2686,19 +2833,33 @@
                 }
 
 
+                <img
+                    class="movie-thumbnail"
+                    src="${escapeHTML(
+                        movieData[cleanMovieTitle(title)]?.poster || ""
+                    )}"
+                    alt=""
+                    onerror="this.style.visibility='hidden'"
+                >
+
+
                 <div
                     class="movie-info"
                 >
 
                     <div class="movie-title">
-                        ${escapeHTML(title)}
+                        ${escapeHTML(displayTitle)}
                     </div>
 
 
                     <div class="movie-meta">
 
-                        ${rank === 1
-                    ? "Top of your ranking"
+                        ${isWatchlist
+                    ? "Watchlist"
+                    : isUnranked
+                    ? "Unranked"
+                    : rank === 1
+                    ? "Favorite Movie?"
                     : "Ranked #" + rank
                 }
 
@@ -3089,7 +3250,97 @@
         ========================================================= */
 
         function saveLocal() {
-            console.log("Pretend to save movies")
+
+            try {
+
+                localStorage.setItem(
+                    "movieRankingMovies",
+                    JSON.stringify(movies)
+                );
+
+            } catch (error) {
+
+                console.warn(
+                    "Could not save movies locally:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        function isWatchlistMovie(
+            title
+        ) {
+
+            return /\s*-\s*watchlist\s*$/i.test(
+                title
+            );
+
+        }
+
+
+        function cleanMovieTitle(
+            title
+        ) {
+
+            return title
+                .replace(
+                    /\s*-\s*(?:watchlist|unranked)\s*$/i,
+                    ""
+                )
+                .trim();
+
+        }
+
+
+        function isUnrankedMovie(
+            title
+        ) {
+
+            return /\s*-\s*unranked\s*$/i.test(
+                title
+            );
+
+        }
+
+
+        function normalizeMovieGroups() {
+
+            const normalizedMovies = [
+                ...movies.filter(
+                    title =>
+                        !isWatchlistMovie(title) &&
+                        !isUnrankedMovie(title)
+                ),
+                ...movies.filter(
+                    title =>
+                        isUnrankedMovie(title)
+                ),
+                ...movies.filter(
+                    title =>
+                        isWatchlistMovie(title)
+                )
+            ];
+
+
+            const changed =
+                normalizedMovies.some(
+                    (title, index) =>
+                        title !== movies[index]
+                );
+
+
+            if (changed) {
+
+                movies = normalizedMovies;
+
+            }
+
+
+            return changed;
+
         }
 
 
@@ -3912,6 +4163,8 @@
                 title
             );
 
+            normalizeMovieGroups();
+
 
             saveLocal();
 
@@ -3921,7 +4174,11 @@
 
 
             showToast(
-                "Movie added to ranking."
+                isWatchlistMovie(title)
+                    ? "Movie added to watchlist."
+                    : isUnrankedMovie(title)
+                    ? "Movie added as unranked."
+                    : "Movie added to ranking."
             );
 
         }
@@ -3997,15 +4254,65 @@
                     await moviesResponse.text();
 
 
+                const savedMovies =
+                    localStorage.getItem(
+                        "movieRankingMovies"
+                    );
+
+                const savedMovieSource =
+                    localStorage.getItem(
+                        "movieRankingSource"
+                    );
+
+
+                let storedMovies = null;
+
+
+                try {
+
+                    storedMovies =
+                        savedMovies
+                            ? JSON.parse(savedMovies)
+                            : null;
+
+                } catch {
+
+                    storedMovies = null;
+
+                }
+
+
+                const useSavedMovies =
+                    Array.isArray(storedMovies) &&
+                    savedMovieSource === moviesText;
+
+
                 movies =
+                    useSavedMovies
+                        ? storedMovies
+                        : moviesText
+                            .split(/\r?\n/)
+                            .map(
+                                line => line.trim()
+                            )
+                            .filter(
+                                line => line.length > 0
+                            );
+
+
+                localStorage.setItem(
+                    "movieRankingSource",
                     moviesText
-                        .split(/\r?\n/)
-                        .map(
-                            line => line.trim()
-                        )
-                        .filter(
-                            line => line.length > 0
-                        );
+                );
+
+
+                if (!useSavedMovies) {
+
+                    localStorage.removeItem(
+                        "movieRankingMovies"
+                    );
+
+                }
 
 
                 /*
