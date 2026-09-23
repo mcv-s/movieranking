@@ -516,5 +516,14 @@
       "Science Fiction",
       "Adventure"
     ]
+  },
+  "F1": {
+    "description": "A retired racing veteran is drawn back into Formula 1 to help a struggling team and mentor its talented young driver. As their different styles collide, they must find a way to work together while pursuing a long-shot chance at success.",
+    "poster": "https://image.tmdb.org/t/p/w780/9PXZIUsSDh4alB80jheWX4fhZmy.jpg",
+    "release_date": "2025-06-25",
+    "genres": [
+      "Action",
+      "Drama"
+    ]
   }
 }
