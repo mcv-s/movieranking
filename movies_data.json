@@ -559,5 +559,34 @@
       "Fantasy",
       "Comedy"
     ]
+  },
+  "Planes: Fire and Rescue": {
+    "description": "After an engine problem threatens a famous air racer’s future, he turns to aerial firefighting. Training with a veteran helicopter and a courageous rescue team, he faces a massive wildfire while learning about teamwork, responsibility, and what it means to become a hero.",
+    "poster": "https://image.tmdb.org/t/p/w780/pOmteFeBDI9FJOPTDvYJYFeAtdp.jpg",
+    "release_date": "2014-07-17",
+    "genres": [
+      "Animation",
+      "Comedy",
+      "Adventure",
+      "Family"
+    ]
+  },
+  "Raiders of the Lost Ark": {
+    "description": "A globe-trotting archaeology professor is recruited to find the legendary Ark of the Covenant before the Nazi regime can claim it. His mission leads through ancient sites, dangerous rivals, perilous escapes, and a reluctant partnership with a headstrong former ally.",
+    "poster": "https://image.tmdb.org/t/p/w780/ceG9VzoRAVGwivFU403Wc3AHRys.jpg",
+    "release_date": "1981-06-12",
+    "genres": [
+      "Adventure",
+      "Action"
+    ]
+  },
+  "Dune: Part Three": {
+    "description": "Emperor Paul Atreides faces the fallout from his ascent to power as political plots and a galaxy-wide holy war endanger the future only he can see.",
+    "poster": "https://image.tmdb.org/t/p/w780/d43fvHQsIMa4kpyhKXw0haEJIvI.jpg",
+    "release_date": "2026-12-15",
+    "genres": [
+      "Science Fiction",
+      "Adventure"
+    ]
   }
 }
