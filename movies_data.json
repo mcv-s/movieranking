@@ -535,5 +535,24 @@
       "Family",
       "Fantasy"
     ]
+  },
+  "iRobot": {
+    "description": "In 2035, robots are a normal part of everyday life, guided by strict safety rules. A detective who distrusts them investigates a suspected suicide and begins uncovering evidence that could point to a dangerous threat involving humanity’s dependence on technology.",
+    "poster": "https://image.tmdb.org/t/p/w780/efwv6F2lGaghjPpBRSINHtoEiZB.jpg",
+    "release_date": "2004-07-15",
+    "genres": [
+      "Action",
+      "Science Fiction"
+    ]
+  },
+  "Groundhog Day": {
+    "description": "A cynical TV weatherman travels with his idealistic producer and sardonic cameraman to cover a quirky winter festival in a small Pennsylvania town. After a snow-related setback, he discovers that he is reliving the same day repeatedly, forcing him to confront his attitude, choices, and relationships.",
+    "poster": "https://image.tmdb.org/t/p/w780/gCgt1WARPZaXnq523ySQEUKinCs.jpg",
+    "release_date": "1993-02-11",
+    "genres": [
+      "Romance",
+      "Fantasy",
+      "Comedy"
+    ]
   }
 }
