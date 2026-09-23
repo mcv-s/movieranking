@@ -5,7 +5,7 @@ Dune: Part Two
 Arrival
 Tron Legacy
 Tron Ares
-F1: Movie
+F1
 Wall-E
 Mission Impossible
 Top Gun Maverick
