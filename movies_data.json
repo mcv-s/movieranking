@@ -525,5 +525,15 @@
       "Action",
       "Drama"
     ]
+  },
+  "Elf": {
+    "description": "Raised at the North Pole after an unexpected journey in Santa’s sack, a grown man who believes he is an elf travels to Manhattan to find his biological father. Out of place in the modern world, he brings unfiltered holiday cheer while trying to connect with his family.",
+    "poster": "https://image.tmdb.org/t/p/w780/oOleziEempUPu96jkGs0Pj6tKxj.jpg",
+    "release_date": "2003-11-07",
+    "genres": [
+      "Comedy",
+      "Family",
+      "Fantasy"
+    ]
   }
 }
