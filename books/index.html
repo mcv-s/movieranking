@@ -2082,7 +2082,7 @@
                     The book will be added to the bottom
                     of your current list. Add
                     Add <strong>-unranked</strong> for an
-                    Unranked section, or <strong>-watchlist</strong>
+                    Unranked section, or <strong>-reading-list</strong>
                     to place it below that section.
                 </p>
 
@@ -2729,7 +2729,7 @@
                         book =>
                             book.title
                                 .replace(
-                                    /\s*-\s*(?:watchlist|unranked)\s*$/i,
+                                    /\s*-\s*(?:reading-list|unranked)\s*$/i,
                                     ""
                                 )
                                 .toLowerCase()
@@ -2740,7 +2740,7 @@
             const rankedbooks =
                 visiblebooks.filter(
                     book =>
-                        !isWatchlistbook(book.title) &&
+                        !isReadingListbook(book.title) &&
                         !isUnrankedbook(book.title)
                 );
 
@@ -2754,10 +2754,10 @@
                 );
 
 
-            const watchlistbooks =
+            const reading-listbooks =
                 visiblebooks.filter(
                     book =>
-                        isWatchlistbook(
+                        isReadingListbook(
                             book.title
                         )
                 );
@@ -2825,13 +2825,13 @@
                     .join("") +
                 unrankedSection +
                 (
-                    watchlistbooks.length > 0
+                    reading-listbooks.length > 0
                         ? `
                             <div class="book-section-heading">
-                                Watchlist
+                                ReadingList
                             </div>
                         ` +
-                        watchlistbooks
+                        reading-listbooks
                             .map(
                                 (book, visibleIndex) =>
                                     createbookRow(
@@ -2862,19 +2862,19 @@
             visibleIndex
         ) {
 
-            const isWatchlist =
-                isWatchlistbook(title);
+            const isReadingList =
+                isReadingListbook(title);
 
             const isUnranked =
                 isUnrankedbook(title);
 
             const isNonRanked =
-                isWatchlist || isUnranked;
+                isReadingList || isUnranked;
 
             const displayTitle =
                 title
                     .replace(
-                        /\s*-\s*(?:watchlist|unranked)\s*$/i,
+                        /\s*-\s*(?:reading-list|unranked)\s*$/i,
                         ""
                     )
                     .trim();
@@ -3046,8 +3046,8 @@
 
                     <div class="book-meta">
 
-                        ${isWatchlist
-                    ? "Watchlist"
+                        ${isReadingList
+                    ? "ReadingList"
                     : isUnranked
                         ? "Unranked"
                         : escapeHTML(
@@ -3464,11 +3464,11 @@
         }
 
 
-        function isWatchlistbook(
+        function isReadingListbook(
             title
         ) {
 
-            return /\s*-\s*watchlist\s*$/i.test(
+            return /\s*-\s*reading-list\s*$/i.test(
                 title
             );
 
@@ -3481,7 +3481,7 @@
 
             return title
                 .replace(
-                    /\s*-\s*(?:watchlist|unranked)\s*$/i,
+                    /\s*-\s*(?:reading-list|unranked)\s*$/i,
                     ""
                 )
                 .trim();
@@ -3525,7 +3525,7 @@
             const normalizedbooks = [
                 ...books.filter(
                     title =>
-                        !isWatchlistbook(title) &&
+                        !isReadingListbook(title) &&
                         !isUnrankedbook(title)
                 ),
                 ...books.filter(
@@ -3534,7 +3534,7 @@
                 ),
                 ...books.filter(
                     title =>
-                        isWatchlistbook(title)
+                        isReadingListbook(title)
                 )
             ];
 
@@ -4388,8 +4388,8 @@
 
 
             showToast(
-                isWatchlistbook(title)
-                    ? "book added to watchlist."
+                isReadingListbook(title)
+                    ? "book added to reading-list."
                     : isUnrankedbook(title)
                         ? "book added as unranked."
                         : "book added to ranking."
