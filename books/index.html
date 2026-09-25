@@ -2139,8 +2139,6 @@
 
         let bookData = {};
 
-        const bookDataCacheKey = "bookRankingOpenLibraryData";
-
         const defaultBookImage = "Default Did Not Load.png";
 
 
@@ -2393,20 +2391,9 @@
 
         async function loadBookData() {
 
-            const savedData = localStorage.getItem(bookDataCacheKey);
-
-            try {
-                bookData = savedData ? JSON.parse(savedData) : {};
-            } catch {
-                bookData = {};
-            }
+            bookData = {};
 
             await Promise.all(books.map(fetchBookData));
-
-            localStorage.setItem(
-                bookDataCacheKey,
-                JSON.stringify(bookData)
-            );
 
         }
 
@@ -3445,22 +3432,6 @@
 
         function saveLocal() {
 
-            try {
-
-                localStorage.setItem(
-                    "bookRankingbooks",
-                    JSON.stringify(books)
-                );
-
-            } catch (error) {
-
-                console.warn(
-                    "Could not save books locally:",
-                    error
-                );
-
-            }
-
         }
 
 
@@ -4468,65 +4439,15 @@
                     await booksResponse.text();
 
 
-                const savedbooks =
-                    localStorage.getItem(
-                        "bookRankingbooks"
-                    );
-
-                const savedbooksource =
-                    localStorage.getItem(
-                        "bookRankingSource"
-                    );
-
-
-                let storedbooks = null;
-
-
-                try {
-
-                    storedbooks =
-                        savedbooks
-                            ? JSON.parse(savedbooks)
-                            : null;
-
-                } catch {
-
-                    storedbooks = null;
-
-                }
-
-
-                const useSavedbooks =
-                    Array.isArray(storedbooks) &&
-                    savedbooksource === booksText;
-
-
                 books =
-                    useSavedbooks
-                        ? storedbooks
-                        : booksText
-                            .split(/\r?\n/)
-                            .map(
-                                line => line.trim()
-                            )
-                            .filter(
-                                line => line.length > 0
-                            );
-
-
-                localStorage.setItem(
-                    "bookRankingSource",
                     booksText
-                );
-
-
-                if (!useSavedbooks) {
-
-                    localStorage.removeItem(
-                        "bookRankingbooks"
-                    );
-
-                }
+                        .split(/\r?\n/)
+                        .map(
+                            line => line.trim()
+                        )
+                        .filter(
+                            line => line.length > 0
+                        );
 
 
                 /*
