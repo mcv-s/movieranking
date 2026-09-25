@@ -2082,7 +2082,7 @@
                     The book will be added to the bottom
                     of your current list. Add
                     Add <strong>-unranked</strong> for an
-                    Unranked section, or <strong>-reading-list</strong>
+                    Unranked section, or <strong>-readinglist</strong>
                     to place it below that section.
                 </p>
 
@@ -2729,7 +2729,7 @@
                         book =>
                             book.title
                                 .replace(
-                                    /\s*-\s*(?:reading-list|unranked)\s*$/i,
+                                    /\s*-\s*(?:readinglist|unranked)\s*$/i,
                                     ""
                                 )
                                 .toLowerCase()
@@ -2754,7 +2754,7 @@
                 );
 
 
-            const reading-listbooks =
+            const readinglistbooks =
                 visiblebooks.filter(
                     book =>
                         isReadingListbook(
@@ -2825,13 +2825,13 @@
                     .join("") +
                 unrankedSection +
                 (
-                    reading-listbooks.length > 0
+                    readinglistbooks.length > 0
                         ? `
                             <div class="book-section-heading">
                                 ReadingList
                             </div>
                         ` +
-                        reading-listbooks
+                        readinglistbooks
                             .map(
                                 (book, visibleIndex) =>
                                     createbookRow(
@@ -2874,7 +2874,7 @@
             const displayTitle =
                 title
                     .replace(
-                        /\s*-\s*(?:reading-list|unranked)\s*$/i,
+                        /\s*-\s*(?:readinglist|unranked)\s*$/i,
                         ""
                     )
                     .trim();
@@ -3468,7 +3468,7 @@
             title
         ) {
 
-            return /\s*-\s*reading-list\s*$/i.test(
+            return /\s*-\s*readinglist\s*$/i.test(
                 title
             );
 
@@ -3481,7 +3481,7 @@
 
             return title
                 .replace(
-                    /\s*-\s*(?:reading-list|unranked)\s*$/i,
+                    /\s*-\s*(?:readinglist|unranked)\s*$/i,
                     ""
                 )
                 .trim();
@@ -4389,7 +4389,7 @@
 
             showToast(
                 isReadingListbook(title)
-                    ? "book added to reading-list."
+                    ? "book added to readinglist."
                     : isUnrankedbook(title)
                         ? "book added as unranked."
                         : "book added to ranking."
